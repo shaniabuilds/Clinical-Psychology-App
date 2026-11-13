@@ -418,6 +418,64 @@ a {
     display: none !important;
   }
 }
+.login {
+  max-width: 360px;
+  margin: 48px auto;
+  text-align: center;
+}
+.login input {
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 0 10px;
+}
+.login-logo {
+  width: 56px;
+  margin-bottom: 6px;
+}
+.login h2::after {
+  margin: 6px auto 0;
+}
+.card.pc {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pform {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.pform label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--mut);
+  font-weight: 600;
+}
+.pform input,
+.pform select,
+.pform textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: 400;
+}
+.pform .wide {
+  grid-column: 1/-1;
+}
+.pstrip {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-left: 4px solid var(--acc2);
+  padding: 10px 16px;
+}
 /* report sheet */
 .sheet {
   background: #fff;
@@ -610,21 +668,4 @@ a {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
-}
-
-/* Hide all scrollbars */
-html,
-body,
-* {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-
-*::-webkit-scrollbar,
-*::-webkit-scrollbar-track,
-*::-webkit-scrollbar-thumb {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  background: transparent !important;
 }
