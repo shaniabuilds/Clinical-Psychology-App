@@ -49,7 +49,27 @@ mongoose
   .connect(MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB successfully");
-    app.listen(PORT, () => {
+    app.listen(PORT, () => { console.log(`Server running on http://localhost:${PORT}`);
+      // Load IQ config seeds after DB connection
+      const fs = require('fs');
+      const path = require('path');
+      const IqConfig = require('./models/IqConfig');
+      const seedDir = path.join(__dirname, 'seed');
+      ['items', 'norms'].forEach(async (key) => {
+        try {
+          const existing = await IqConfig.findOne({ key });
+          if (!existing) {
+            const seedPath = path.join(seedDir, `${key}.example.json`);
+            if (fs.existsSync(seedPath)) {
+              const data = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
+              await IqConfig.create({ key, data, updatedBy: 'system' });
+              console.log(`Created default ${key} config from seed`);
+            }
+          }
+        } catch (e) {
+          console.error(`Failed to load ${key} seed:`, e.message);
+        }
+      });
       console.log(`Server running on http://localhost:${PORT}`);
     });
   })
